@@ -34,5 +34,8 @@ group :development, :test do
 
   gem 'rspec-rails'
   gem 'guard'
+  # Testing
   gem 'guard-rspec'
+  # Linter
+  gem 'guard-rubocop'
 end
