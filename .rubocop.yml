@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - 'bin/**/*'
-    - 'config/initializers/wrap_parameters'
 Style/Documentation:
+  Enabled: false
+Metrics/LineLength:
   Enabled: false
