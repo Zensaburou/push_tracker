@@ -31,8 +31,10 @@ group :development, :test do
   gem 'spring'
 
   gem 'rspec-rails'
+
   gem 'guard'
   gem 'guard-rspec'
+  gem 'spring-commands-rspec'
 
   # Linter
   gem 'guard-rubocop'
