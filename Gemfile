@@ -28,13 +28,14 @@ gem 'unicorn-rails'
 group :development, :test do
   gem 'byebug'
 
-  gem 'spring'
-
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
+
+  gem 'spring'
+  gem 'spring-commands-rspec'
 
   gem 'guard'
   gem 'guard-rspec'
-  gem 'spring-commands-rspec'
 
   # Linter
   gem 'guard-rubocop'
