@@ -29,7 +29,7 @@ group :development, :test do
   gem 'byebug'
 
   gem 'rspec-rails'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', require: false
 
   gem 'spring'
   gem 'spring-commands-rspec'
