@@ -28,11 +28,11 @@ gem 'unicorn-rails'
 group :development, :test do
   gem 'byebug'
 
-  gem 'rspec-rails'
-  gem 'shoulda-matchers', require: false
-
   gem 'spring'
   gem 'spring-commands-rspec'
+
+  gem 'rspec-rails'
+  gem 'shoulda-matchers', require: false
 
   gem 'guard'
   gem 'guard-rspec'
