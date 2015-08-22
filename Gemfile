@@ -39,4 +39,8 @@ group :development, :test do
 
   # Linter
   gem 'guard-rubocop'
+
+  gem 'factory_girl_rails'
+
+  gem 'faker'
 end
