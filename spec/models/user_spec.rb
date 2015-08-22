@@ -7,4 +7,6 @@ RSpec.describe User, type: :model do
     subject { FactoryGirl.build :user }
     it { is_expected.to validate_uniqueness_of(:name).case_insensitive }
   end
+
+  it { is_expected.to have_many :categories }
 end
