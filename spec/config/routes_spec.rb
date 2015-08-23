@@ -3,7 +3,7 @@ require 'faker'
 
 RSpec.describe 'routes', type: :routing do
   it 'creates users' do
-    user_name = Faker::Company.name
+    user_name = Faker::Company.name.tr(' ', '_')
     expected_route = '/' << user_name
     expect(post(expected_route)).to route_to(
       controller: 'users',
@@ -13,7 +13,7 @@ RSpec.describe 'routes', type: :routing do
   end
 
   it 'creates categories' do
-    user_name = Faker::Company.name
+    user_name = Faker::Company.name.tr(' ', '_')
     category_name = Faker::Company.bs.tr(' ', '_')
     expected_route = '/' << user_name << '/' << category_name
     expect(post(expected_route)).to route_to(
@@ -25,7 +25,7 @@ RSpec.describe 'routes', type: :routing do
   end
 
   it 'creates events' do
-    user_name = Faker::Company.name
+    user_name = Faker::Company.name.tr(' ', '_')
     category_name = Faker::Company.bs.tr(' ', '_')
     expected_route = '/' << user_name << '/' << category_name << '/create'
     expect(post(expected_route)).to route_to(
