@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe EventsController do
+RSpec.describe EventsController, type: :controller do
   describe 'create' do
   end
 end
