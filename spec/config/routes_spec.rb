@@ -11,4 +11,16 @@ RSpec.describe 'routes', type: :routing do
       name: user_name
     )
   end
+
+  it 'creates categories' do
+    user_name = Faker::Company.name
+    category_name = Faker::Company.bs.tr(' ', '_')
+    expected_route = '/' << user_name << '/' << category_name
+    expect(post(expected_route)).to route_to(
+      controller: 'categories',
+      action: 'create',
+      user_name: user_name,
+      name: category_name
+    )
+  end
 end

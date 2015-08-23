@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   post '/:name' => 'users#create', as: :user_create
+  post '/:user_name/:name' => 'categories#create', as: :category_create
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
