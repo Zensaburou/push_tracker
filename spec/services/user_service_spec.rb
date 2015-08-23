@@ -17,9 +17,17 @@ RSpec.describe UserService do
         expect(expected_user.count).to eq 1
       end
 
-      it 'returns nil' do
+      it 'returns user' do
+        user = @service.create_unique_user(@name)
+        expect(user).to be_a User
+      end
+    end
+
+    context 'user already exists' do
+      it 'returns error message' do
+        User.create!(name: @name)
         error = @service.create_unique_user(@name)
-        expect(error).to be nil
+        expect(error).to be_a StandardError
       end
     end
   end
