@@ -11,5 +11,10 @@ class EventService
   end
 
   def create_event(event_hash)
+    Event.create!(
+      user_id: user.id,
+      category_id: category.id,
+      message: event_hash[:message]
+    )
   end
 end
