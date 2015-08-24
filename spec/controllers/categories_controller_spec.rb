@@ -12,7 +12,7 @@ RSpec.describe CategoriesController, type: :controller do
       post :create, name: @category_name, user_name: @user_name
     end
 
-    it 'renders user json' do
+    it 'renders json' do
       category = FactoryGirl.build :category
       allow_any_instance_of(CategoryService).to receive(:create_category) { category }
       expected_json = {
