@@ -23,5 +23,28 @@ RSpec.describe CategoriesController, type: :controller do
       post :create, name: @category_name, user_name: @user_name
       expect(response.body).to eq expected_json
     end
+
+    context 'error' do
+      it 'renders json' do
+        category = FactoryGirl.build :category
+        allow_any_instance_of(CategoryService).to receive(:create_category) { fail ActiveRecord::RecordInvalid.new(category) }
+        expected_json = {
+          record: {
+            id: category.id,
+            name: category.name,
+            user_id: category.user_id
+          }
+        }.to_json
+        post :create, name: @category_name, user_name: @user_name
+        expect(response.body).to eq expected_json
+      end
+
+      it 'returns status' do
+        category = FactoryGirl.build :category
+        allow_any_instance_of(CategoryService).to receive(:create_category) { fail ActiveRecord::RecordInvalid.new(category) }
+        post :create, name: @category_name, user_name: @user_name
+        expect(response).to have_http_status 422
+      end
+    end
   end
 end
