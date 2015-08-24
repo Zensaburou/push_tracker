@@ -14,7 +14,7 @@ RSpec.describe CategoryService do
       }
     end
 
-    it 'creates a new user' do
+    it 'creates category' do
       @service.create_category(@param_hash)
       expected_category = Category.where(
         name: @param_hash[:name],
