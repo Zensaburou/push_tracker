@@ -1,0 +1,52 @@
+---
+- hosts: all
+  sudo: true
+  tasks:
+    - name: update apt packages
+      apt: update_cache=yes
+
+    - name: ensure git installed
+      apt: name=git state-present
+
+    - ensure postgresql installed
+      apt: name={{ item }} state=present
+      with_items:
+        - postgresql
+        - libpq-dev
+        - python-psycopg2
+
+  roles:
+    - role: rvm_io.rvm1-ruby
+      rvm1_rubies:
+        - 'ruby-2.2.2'
+
+- hosts: all
+  sudo: yes
+  sudo_user: postgres
+  gather_facts: no
+
+  handlers:
+    - name: restart postgresql
+      service: name=postgresql state=restarted
+
+  tasks:
+    - name: ensure access to postgres
+      copy:
+        dest: /etc/postgresql/9.3/main/pg_hba.conf
+          context: |
+            local   all   postgres   peer
+            local   all   all        peer
+            host    all   all        0.0.0.0/0   md5
+      notify: restart postgresql
+
+  vars:
+    dbname: app
+    dbuser: app
+    dbpassword: app
+
+  tasks:
+    - name: ensure database is created
+      postgresql_db: name={{dbname}}
+
+    - name: ensure postgres user exists
+      postgresql_user: db={{dbname}} name={{dbuser}} password={{dbpassword}} priv=ALL
