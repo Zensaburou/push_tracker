@@ -6,7 +6,7 @@
       apt: update_cache=yes
 
     - name: ensure git installed
-      apt: name=git state-present
+      apt: name=git state=present
 
     - ensure postgresql installed
       apt: name={{ item }} state=present
