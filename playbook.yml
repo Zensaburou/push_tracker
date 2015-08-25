@@ -33,10 +33,10 @@
     - name: ensure access to postgres
       copy:
         dest: /etc/postgresql/9.3/main/pg_hba.conf
-          context: |
-            local   all   postgres   peer
-            local   all   all        peer
-            host    all   all        0.0.0.0/0   md5
+        context: |
+          local   all   postgres   peer
+          local   all   all        peer
+          host    all   all        0.0.0.0/0   md5
       notify: restart postgresql
 
   vars:
