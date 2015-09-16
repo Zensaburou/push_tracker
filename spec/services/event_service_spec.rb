@@ -42,6 +42,16 @@ RSpec.describe EventService do
       end
     end
 
+    describe 'parse_event_array' do
+      before :example do
+        @service.instance_variable_set(:@param_hash, @param_hash)
+      end
+
+      it 'returns array of event hashes' do
+        expect(@service.parse_event_array).to eq @event_array
+      end
+    end
+
     describe 'create_event' do
       before :example do
         @event_hash = { message: @message }

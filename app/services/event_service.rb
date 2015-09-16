@@ -1,8 +1,12 @@
 class EventService
   def create_events(param_hash)
     @param_hash = param_hash
-    event_array = param_hash[:payload][:events]
+    event_array = parse_event_array
     event_array.map { |event_hash| create_event(event_hash) }
+  end
+
+  def parse_event_array
+    @param_hash[:payload][:events]
   end
 
   def create_event(event_hash)
