@@ -1,11 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe EventService do
-  it { is_expected.to respond_to(:category) }
-  it { is_expected.to respond_to(:category=) }
-  it { is_expected.to respond_to(:user) }
-  it { is_expected.to respond_to(:user=) }
-
   describe 'instance methods' do
     before :context do
       @user = FactoryGirl.create :user
