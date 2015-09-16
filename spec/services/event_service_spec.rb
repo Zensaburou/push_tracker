@@ -4,8 +4,19 @@ RSpec.describe EventService do
   describe 'instance methods' do
     before :context do
       @user = FactoryGirl.create :user
-      @category = FactoryGirl.create :category
+      @category = FactoryGirl.create(:category, user_id: @user.id)
       @message = Faker::Lorem.sentence
+      @second_message = Faker::Lorem.sentence
+      @param_hash = {
+        category_name: @category.name,
+        user_name: @user.name,
+        payload: {
+          events: [
+            { message: @message },
+            { message: @second_message }
+          ]
+        }
+      }
     end
 
     before :example do
@@ -13,30 +24,10 @@ RSpec.describe EventService do
     end
 
     describe 'create_events' do
-      before :context do
-        @second_message = Faker::Lorem.sentence
-        @param_hash = {
-          category_name: @category.name,
-          user_name: @user.name,
-          payload: {
-            events: [
-              { message: @message },
-              { message: @second_message }
-            ]
-          }
-        }
-      end
-
-      it 'sets user' do
+      it 'sets param_hash' do
         @service.create_events(@param_hash)
-        instance_var = @service.instance_variable_get(:@user)
-        expect(instance_var).to eq @user
-      end
-
-      it 'sets category' do
-        @service.create_events(@param_hash)
-        instance_var = @service.instance_variable_get(:@category)
-        expect(instance_var).to eq @category
+        instance_var = @service.instance_variable_get(:@param_hash)
+        expect(instance_var).to eq @param_hash
       end
 
       it 'calls create_event' do
@@ -55,8 +46,7 @@ RSpec.describe EventService do
     describe 'create_event' do
       before :example do
         @event_hash = { message: @message }
-        @service.instance_variable_set(:@user, @user)
-        @service.instance_variable_set(:@category, @category)
+        @service.instance_variable_set(:@param_hash, @param_hash)
       end
 
       it 'creates event' do
@@ -67,6 +57,26 @@ RSpec.describe EventService do
           message: @message
         )
         expect(events.count).to eq 1
+      end
+    end
+
+    describe 'parse_user' do
+      before :example do
+        @service.instance_variable_set(:@param_hash, @param_hash)
+      end
+
+      it 'returns the user' do
+        expect(@service.parse_user).to eq @user
+      end
+    end
+
+    describe 'parse_category' do
+      before :example do
+        @service.instance_variable_set(:@param_hash, @param_hash)
+      end
+
+      it 'returns the category' do
+        expect(@service.parse_category).to eq @category
       end
     end
   end
