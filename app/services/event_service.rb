@@ -6,14 +6,15 @@ class EventService
   end
 
   def parse_event_array
-    @param_hash[:payload][:events]
+    payload = parse_json_payload
+    payload['events']
   end
 
   def create_event(event_hash)
     Event.create!(
       user_id: parse_user.id,
       category_id: parse_category.id,
-      message: event_hash[:message]
+      message: event_hash['message']
     )
   end
 
@@ -26,5 +27,12 @@ class EventService
       user_id: parse_user.id,
       name: @param_hash[:category_name]
     )
+  end
+
+  private
+
+  def parse_json_payload
+    json = @param_hash[:payload]
+    JSON.parse(json)
   end
 end

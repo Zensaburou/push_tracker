@@ -8,13 +8,14 @@ RSpec.describe EventService do
       @message = Faker::Lorem.sentence
       @second_message = Faker::Lorem.sentence
       @event_array = [
-        { message: @message },
-        { message: @second_message }
+        { 'message' => @message },
+        { 'message' => @second_message }
       ]
+      @payload = { 'events' => @event_array }.to_json
       @param_hash = {
         category_name: @category.name,
         user_name: @user.name,
-        payload: { events: @event_array }
+        payload: @payload
       }
     end
 
@@ -30,7 +31,7 @@ RSpec.describe EventService do
       end
 
       it 'calls create_event' do
-        event_number = @param_hash[:payload][:events].count
+        event_number = @event_array.count
         expect_any_instance_of(EventService).to receive(:create_event).exactly(event_number).times
         @service.create_events(@param_hash)
       end
@@ -54,7 +55,7 @@ RSpec.describe EventService do
 
     describe 'create_event' do
       before :example do
-        @event_hash = { message: @message }
+        @event_hash = { 'message' => @message }
         @service.instance_variable_set(:@param_hash, @param_hash)
       end
 
