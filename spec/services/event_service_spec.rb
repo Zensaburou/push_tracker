@@ -7,15 +7,14 @@ RSpec.describe EventService do
       @category = FactoryGirl.create(:category, user_id: @user.id)
       @message = Faker::Lorem.sentence
       @second_message = Faker::Lorem.sentence
+      @event_array = [
+        { message: @message },
+        { message: @second_message }
+      ]
       @param_hash = {
         category_name: @category.name,
         user_name: @user.name,
-        payload: {
-          events: [
-            { message: @message },
-            { message: @second_message }
-          ]
-        }
+        payload: { events: @event_array }
       }
     end
 
