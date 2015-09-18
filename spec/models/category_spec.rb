@@ -5,7 +5,7 @@ RSpec.describe Category, type: :model do
 
   describe 'uniqueness' do
     subject { FactoryGirl.build :category }
-    it { is_expected.to validate_uniqueness_of(:name).case_insensitive }
+    it { is_expected.to validate_uniqueness_of(:name).case_insensitive.scoped_to(:user_id) }
   end
 
   it { is_expected.to belong_to :user }
