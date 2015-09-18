@@ -20,8 +20,7 @@ RSpec.describe EventsController, type: :controller do
         category_id: event.category_id,
         message: event.message,
         created_at: event.created_at,
-        updated_at: event.updated_at,
-        user_id: event.user_id
+        updated_at: event.updated_at
       }.to_json
       post :create, category_name: @category_name, user_name: @user_name
       expect(response.body).to eq expected_json
@@ -37,8 +36,7 @@ RSpec.describe EventsController, type: :controller do
             category_id: event.category_id,
             message: event.message,
             created_at: event.created_at,
-            updated_at: event.updated_at,
-            user_id: event.user_id
+            updated_at: event.updated_at
           }
         }.to_json
         post :create, category_name: @category_name, user_name: @user_name

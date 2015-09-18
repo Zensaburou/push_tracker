@@ -9,5 +9,5 @@ RSpec.describe User, type: :model do
   end
 
   it { is_expected.to have_many :categories }
-  it { is_expected.to have_many(:events).through(:category) }
+  it { is_expected.to have_many(:events).through(:categories) }
 end

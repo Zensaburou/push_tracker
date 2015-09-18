@@ -12,7 +12,6 @@ class EventService
 
   def create_event(event_hash)
     Event.create!(
-      user_id: parse_user.id,
       category_id: parse_category.id,
       message: event_hash['message']
     )

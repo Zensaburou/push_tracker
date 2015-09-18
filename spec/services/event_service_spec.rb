@@ -62,7 +62,6 @@ RSpec.describe EventService do
       it 'creates event' do
         @service.create_event(@event_hash)
         events = Event.where(
-          user_id: @user.id,
           category_id: @category.id,
           message: @message
         )

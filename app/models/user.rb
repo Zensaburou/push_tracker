@@ -3,5 +3,5 @@ class User < ActiveRecord::Base
   validates :name, uniqueness: { case_sensitive: false }
 
   has_many :categories
-  has_many :events, through: :category
+  has_many :events, through: :categories
 end
